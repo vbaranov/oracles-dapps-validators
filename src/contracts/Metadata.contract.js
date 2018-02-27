@@ -1,7 +1,6 @@
 import PoaConsensus from './PoaConsensus.contract'
 import Web3 from 'web3';
 import moment from 'moment';
-import networkAddresses from './addresses';
 import helpers from "./helpers";
 var toAscii = function(hex) {
   var str = '',
@@ -58,7 +57,7 @@ export default class Metadata {
     return {
       firstName: 'Igor',
       lastName: 'Barinov',
-      fullAddress: '755 Bounty Dr 202',
+      fullAddress: '755 Bounty Dr 202, Foster City',
       createdDate: '2017-12-18',
       updatedDate: '',
       expirationDate: '2021-07-23',

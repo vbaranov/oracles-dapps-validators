@@ -9,46 +9,28 @@ import getWeb3, {setWeb3} from './getWeb3'
 import {
   Router,
   Route,
-  Link,
   NavLink
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import Loading from './Loading'
+import Footer from './Footer';
 import AllValidators from './AllValidators'
 import Select from 'react-select'
 import "react-select/dist/react-select.css";
 import networkAddresses from './contracts/addresses';
 
 let errorMsgNoMetamaskAccount = `Your MetaMask is locked.
-Please, choose your voting key in MetaMask and reload the page.
+Please choose your voting key in MetaMask and reload the page.
 Check POA Network <a href='https://github.com/poanetwork/wiki' target='blank'>wiki</a> for more info.`;
 
 const history = createBrowserHistory()
 
 function generateElement(msg){
   let errorNode = document.createElement("div");
-  errorNode.innerHTML = `<div>
+  errorNode.innerHTML = `<div style="line-height: 1.6;">
     ${msg}
   </div>`;
   return errorNode;
-}
-
-let Footer = ({netId}) => {
-  const footerClassName = netId === '77' ? 'sokol' : '';
-  return (
-    <footer className={`footer ${footerClassName}`}>
-      <div className="container">
-        <p className="footer-rights">2017 POA Network. All rights reserved.</p>
-        <a href="/poa-dapps-validators" className="footer-logo"></a>
-        <div className="socials">
-          <a href="https://twitter.com/poanetwork" className="socials-i socials-i_twitter"></a>
-          <a href="https://poa.network" className="socials-i socials-i_oracles"></a>
-          <a href="https://t.me/oraclesnetwork" className="socials-i socials-i_telegram"></a>
-          <a href="https://github.com/poanetwork/" className="socials-i socials-i_github"></a>
-        </div>
-      </div>
-    </footer>
-  )
 }
 
 let Header = ({netId, onChange, injectedWeb3}) => {
@@ -210,7 +192,7 @@ class AppMainRouter extends Component {
     });
   }
   onPendingChangesRender() {
-    return this.state.loading && this.state.error? '' : <AllValidators
+    return this.state.loading || this.state.error? '' : <AllValidators
       ref="AllValidatorsRef"
       methodToCall="getAllPendingChanges"
       searchTerm={this.state.searchTerm}
