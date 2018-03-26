@@ -31,7 +31,10 @@
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "test": "react-scripts test --env=jsdom",
+    "start:silent": "npm run start &",
+    "test:e2e_test": "cd ./submodules/poa-test-setup/ && npm i && npm run start-moc-setup",
+    "test:e2e": "PORT=3001 BROWSER=none npm run start:silent && cd ./submodules/poa-test-setup/ && npm i && npm run start-moc-setup && npm run launch-dapps-light && npm run launch-ceremony && npm run set-validators-data",
+    "test": "npm run test:e2e && react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
 }
